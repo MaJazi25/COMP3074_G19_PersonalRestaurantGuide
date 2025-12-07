@@ -29,10 +29,10 @@ class AddEditActivity : AppCompatActivity() {
         if (existing != null) {
             vb.etName.setText(existing.name)
             vb.etAddress.setText(existing.address)
-            vb.etPhones.setText(existing.phones.joinToString(", "))
+            vb.etPhones.setText(existing.getPhonesList().joinToString(", "))
             vb.etDescription.setText(existing.description)
             vb.ratingBar.rating = existing.rating
-            vb.etTags.setText(existing.tags.joinToString(", "))
+            vb.etTags.setText(existing.getTagsList().joinToString(", "))
         }
 
         vb.btnSave.setOnClickListener {
@@ -50,13 +50,13 @@ class AddEditActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val r = Restaurant(
+            val r = Restaurant.create(
                 id = editingId ?: UUID.randomUUID().toString(),
                 name = name,
                 address = address,
-                phones = phones,
+                phonesList = phones,
                 description = desc,
-                tags = tags,
+                tagsList = tags,
                 rating = rating
             )
             if (editingId == null) RestaurantRepository.add(r) else RestaurantRepository.update(r)

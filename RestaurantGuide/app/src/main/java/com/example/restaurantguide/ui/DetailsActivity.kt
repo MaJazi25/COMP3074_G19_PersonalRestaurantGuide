@@ -35,8 +35,8 @@ class DetailsActivity : AppCompatActivity() {
         vb.tvName.text = r.name
         vb.ratingBar.rating = r.rating
         vb.tvAddress.text = r.address
-        vb.tvPhone.text = r.phones.firstOrNull().orEmpty()
-        vb.tvTags.text = r.tags.joinToString(", ")
+        vb.tvPhone.text = r.getPhonesList().firstOrNull().orEmpty()
+        vb.tvTags.text = r.getTagsList().joinToString(", ")
         vb.tvDescription.text = r.description
 
         vb.btnDirections.setOnClickListener {
@@ -54,11 +54,13 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         vb.btnShare.setOnClickListener {
+            val phonesList = r.getPhonesList()
+            val tagsList = r.getTagsList()
             val text = buildString {
                 appendLine(r.name)
                 appendLine(r.address)
-                if (r.phones.isNotEmpty()) appendLine(r.phones.joinToString())
-                if (r.tags.isNotEmpty()) appendLine(r.tags.joinToString(", "))
+                if (phonesList.isNotEmpty()) appendLine(phonesList.joinToString())
+                if (tagsList.isNotEmpty()) appendLine(tagsList.joinToString(", "))
             }
             startActivity(Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"

@@ -1,7 +1,9 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("com.google.devtools.ksp") version "2.0.21-1.0.27"
 }
+
 
 android {
     namespace = "com.example.restaurantguide"
@@ -43,4 +45,9 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.9.3")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("com.google.code.gson:gson:2.11.0")
+    
+    // Room Database
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    ksp("androidx.room:room-compiler:2.6.1")
 }

@@ -22,7 +22,7 @@ class RestaurantAdapter(
         val r = items[position]
         holder.vb.tvName.text = r.name
         holder.vb.tvAddress.text = r.address
-        holder.vb.tvTags.text = r.tags.joinToString(", ")
+        holder.vb.tvTags.text = r.getTagsList().joinToString(", ")
         holder.vb.ratingBar.rating = r.rating
         holder.itemView.setOnClickListener { onClick(r) }
     }
